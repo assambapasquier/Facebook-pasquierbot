@@ -3,9 +3,13 @@ import sys
 import json
 
 import requests
+import aiml
 from flask import Flask, request
 
 app = Flask(__name__)
+kernel = aiml.Kernel()
+kernel.learn("std-startup.xml")
+kernel.respond("load aiml b")
 
 
 @app.route('/', methods=['GET'])
@@ -39,12 +43,13 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
-                    send_message(sender_id, "got it, thanks!")
+                    #send_message(sender_id, "got it, thanks!") kernel.respond
+					send_message(sender_id, kernel.respond(message_text))
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
 
-                if messaging_event.get("optin"):  # optin confirmation
+                if messaging_event.get("optin"):  # option confirmation
                     pass
 
                 if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
