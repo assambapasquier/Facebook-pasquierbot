@@ -11,9 +11,9 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def verify():
-	kernel = aiml.Kernel()
-	kernel.learn("std-startup.xml")
-	kernel.respond("load aiml b")
+	#kernel = aiml.Kernel()
+	#kernel.learn("std-startup.xml")
+	#kernel.respond("load aiml b")
     # when the endpoint is registered as a webhook, it must echo back
     # the 'hub.challenge' value it receives in the query arguments
     if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
@@ -43,8 +43,8 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
-                    #send_message(sender_id, "got it, thanks!") kernel.respond
-					send_message(sender_id, kernel.respond(message_text))
+                    send_message(sender_id, "got it, thanks!")
+					#send_message(sender_id, kernel.respond(message_text))
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
