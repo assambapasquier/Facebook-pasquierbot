@@ -7,13 +7,13 @@ import aiml
 from flask import Flask, request
 
 app = Flask(__name__)
-kernel = aiml.Kernel()
-kernel.learn("std-startup.xml")
-kernel.respond("load aiml b")
 
 
 @app.route('/', methods=['GET'])
 def verify():
+	kernel = aiml.Kernel()
+	kernel.learn("std-startup.xml")
+	kernel.respond("load aiml b")
     # when the endpoint is registered as a webhook, it must echo back
     # the 'hub.challenge' value it receives in the query arguments
     if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
