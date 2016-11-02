@@ -3,7 +3,7 @@ import sys
 import json
 
 import requests
-import aiml
+#import aiml
 from flask import Flask, request
 
 app = Flask(__name__)
